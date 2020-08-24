@@ -4,12 +4,10 @@ Collect new data into the archive.
 Usage:
   archive collect [--help]
   archive collect <key> <value>
+  archive collect <key>
 """
 from docopt import docopt
-
-
-def collect(key, value):
-    pass
+from . import db
 
 
 def run(argv):
@@ -19,6 +17,8 @@ def run(argv):
     value = args["<value>"]
 
     if key and value:
-        collect(key, value)
+        db.set(key, value)
+    elif key:
+        print(db.get(key))
     else:
         run(["--help"])

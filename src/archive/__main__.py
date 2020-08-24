@@ -15,10 +15,7 @@ Commands:
 """
 import sys
 from docopt import docopt
-try:
-    from archive import meta
-except Exception:
-    import meta
+from . import meta
 
 
 def handle_args(argv):
@@ -30,10 +27,10 @@ def handle_args(argv):
     command = args["<command>"]
     command_argv = [command] + args["<args>"]
     if command == "project":
-        import archive_project
+        from . import archive_project
         archive_project.run(command_argv)
     elif command == "collect":
-        import archive_collect
+        from . import archive_collect
         archive_collect.run(command_argv)
     elif command in ["help", None]:
         handle_args(["--help"])
